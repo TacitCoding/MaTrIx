@@ -6,20 +6,22 @@ public class Matrix {
     public final int numberOfCols;
     public final double[][] values;
 
-    // Provide test cases etc...
-    public static void main(String[] args) {
-        
+    
+
+
+
+
         Matrix mat2 = new Matrix(new double[][] {{0, 2, 0}, 
                                                  {3, 0, 0},
                                                  {0, 0, 1}});   
         
-        double[][] a = {{1, 2}, {3, 4}, {5, 6}};
-        double[][] b = {{6, 7, 6, 7}, {6, 7, 6, 7}};
+        //double[][] a = {{1, 2}, {3, 4}, {5, 6}};
+        //double[][] b = {{6, 7, 6, 7}, {6, 7, 6, 7}};
         //mat2 = byScaler(2, 2, mat2);
         //mat2 = sumOfRows(mat2, 1, 0);
-        mat2.printMatrix();
-        System.out.println();
-        (mat2.inverse()).printMatrix();
+        //mat2.printMatrix();
+        //System.out.println();
+        //(mat2.inverse()).printMatrix();
     }
 
     // Constructor
@@ -102,16 +104,16 @@ public class Matrix {
             );
         }
 
-        double[][] newArr = new double[this.values.length][this.values[0].length];
+        double[][] newArr = new double[this.values.length][other.values[0].length];
 
         for (int row = 0; row < this.numberOfRows; row++) 
-            for (int col = 0; col < this.numberOfCols; col++)
-                newArr[row][col] = matrixMultiplicationSum(this.values[row], getCollum(other.values, col));
+            for (int col = 0; col < other.numberOfCols; col++)
+                newArr[row][col] = multSum(this.values[row], getCol(other.values, col));
 
         return new Matrix(newArr);
     }
 
-    public double matrixMultiplicationSum(double[] a, double[] b) {
+    public double multSum(double[] a, double[] b) {
         double sum = 0;
         for (int i = 0; i < a.length; i++)
             sum += (a[i] * b[i]);
@@ -119,7 +121,7 @@ public class Matrix {
         return sum;
     }
 
-    private double[] getCollum(double[][] a, int collum) {
+    private double[] getCol(double[][] a, int collum) {
         double[] newArr = new double[a.length];
 
         for (int i = 0; i < a.length; i++) 
